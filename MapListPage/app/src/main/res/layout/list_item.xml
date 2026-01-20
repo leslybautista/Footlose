@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="4dp"
+    app:cardBackgroundColor="@android:color/transparent">
+
+    <!-- Make LinearLayout fill the card with gradient background -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/gradient_header"
+        android:padding="16dp"
+        android:gravity="center"
+        android:minHeight="120dp">
+
+        <!-- Rhythm Text -->
+        <TextView
+            android:id="@+id/text_rhythm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Salsa"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginBottom="6dp" />
+
+        <!-- Mobility Text -->
+        <TextView
+            android:id="@+id/text_mobility"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="High mobility"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"
+            android:textStyle="italic"
+            android:alpha="0.9"
+            android:gravity="center" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

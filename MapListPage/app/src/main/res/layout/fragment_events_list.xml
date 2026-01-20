@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="#F5F5F5">
+
+    <!-- Filter Chips -->
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:padding="25dp"
+        android:scrollbars="none">
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chip_group_filters"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:singleSelection="true"
+            app:checkedChip="@id/chip_all">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_all"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="All"
+                android:textSize="20dp"
+
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                app:chipStartPadding="10dp"
+                app:chipEndPadding="10dp"
+
+                />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_free"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Free"
+                android:textSize="20dp"
+
+
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                app:chipStartPadding="10dp"
+                app:chipEndPadding="10dp"
+
+                />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_weel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Weelchair Accesible"
+                android:textSize="20dp"
+
+
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                app:chipStartPadding="10dp"
+                app:chipEndPadding="10dp"
+                />
+
+
+
+        </com.google.android.material.chip.ChipGroup>
+
+    </HorizontalScrollView>
+
+    <!-- RecyclerView -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_events"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="19dp"
+        android:clipToPadding="false" />
+
+</LinearLayout>
