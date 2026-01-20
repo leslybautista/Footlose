@@ -6,186 +6,362 @@
     android:layout_height="match_parent"
     android:background="#F5F5F5">
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#F5F5F5">
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:background="#F5F5F5">
 
-        <!-- Header -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/gradient_header"
-            android:orientation="vertical"
-            android:padding="24dp">
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tv_detail_type"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Salsa"
-                android:textColor="@android:color/white"
-                android:textSize="14sp"
-                android:alpha="0.9" />
-
-            <TextView
-                android:id="@+id/tv_detail_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Saturday Night Salsa"
-                android:textColor="@android:color/white"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                android:layout_marginTop="8dp" />
-
-        </LinearLayout>
-
-        <!-- Details Card -->
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="4dp">
-
+            <!-- Header -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/gradient_header"
                 android:orientation="vertical"
-                android:padding="20dp">
+                android:padding="24dp">
 
                 <TextView
-                    android:id="@+id/tv_detail_description"
-                    android:layout_width="match_parent"
+                    android:id="@+id/tv_detail_type"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Hot salsa night with live DJ and dance lessons"
+                    android:text="Salsa"
+                    android:textColor="@android:color/white"
                     android:textSize="15sp"
-                    android:textColor="#333333"
-                    android:lineSpacingMultiplier="1.4" />
+                    android:alpha="0.9" />
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#E0E0E0"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="16dp" />
-
-                <!-- Date and Time -->
                 <TextView
+                    android:id="@+id/tv_detail_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="📅 Date &amp; Time"
+                    android:text="Saturday Night Salsa"
+                    android:textColor="@android:color/white"
+                    android:textSize="26sp"
                     android:textStyle="bold"
-                    android:textSize="14sp"
-                    android:textColor="#333333" />
-
-                <TextView
-                    android:id="@+id/tv_detail_datetime"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Saturday, Dec 28 • 20:00 - 02:00"
-                    android:textSize="14sp"
-                    android:textColor="#666666"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginBottom="16dp" />
-
-                <!-- Venue -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="📍 Location"
-                    android:textStyle="bold"
-                    android:textSize="14sp"
-                    android:textColor="#333333" />
-
-                <TextView
-                    android:id="@+id/tv_detail_venue"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Groove Station"
-                    android:textSize="14sp"
-                    android:textColor="#666666"
-                    android:layout_marginTop="4dp" />
-
-                <TextView
-                    android:id="@+id/tv_detail_address"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Katharinenstraße 11-13, 01099 Dresden"
-                    android:textSize="13sp"
-                    android:textColor="#999999"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginBottom="16dp" />
-
-                <!-- Price -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="💰 Price"
-                    android:textStyle="bold"
-                    android:textSize="14sp"
-                    android:textColor="#333333" />
-
-                <TextView
-                    android:id="@+id/tv_detail_price"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="€8.00"
-                    android:textSize="20sp"
-                    android:textColor="#4CAF50"
-                    android:textStyle="bold"
-                    android:layout_marginTop="4dp" />
+                    android:layout_marginTop="8dp" />
 
             </LinearLayout>
 
-        </androidx.cardview.widget.CardView>
+            <!-- Details Card -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp">
 
-        <!-- Map Button -->
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_view_map"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="View on Map"
-            app:cornerRadius="50dp"
-            android:padding="16dp"
-            android:textSize="16sp"
-            android:layout_marginBottom="1dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <TextView
+                        android:id="@+id/tv_detail_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:lineSpacingMultiplier="1"
+                        android:text="Hot salsa night with live DJ and dance lessons"
+                        android:textColor="#333333"
+                        android:textSize="21sp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="9dp"
+                        android:background="#E0E0E0" />
+
+                    <!-- Date and Time -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="1dp"
+                        android:layout_marginBottom="16dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <!-- ICON COLUMN -->
+                        <TextView
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:layout_marginEnd="12dp"
+                            android:gravity="center"
+                            android:text="📅"
+                            android:textColor="#333333"
+                            android:textSize="40sp" />
+
+                        <!-- TEXT COLUMN -->
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Date &amp; Time"
+                                android:textColor="#333333"
+                                android:textSize="22sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/tv_detail_datetime"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:text="Saturday, Dec 28 • 20:00 - 02:00"
+                                android:textColor="@color/black"
+                                android:textSize="20sp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <!-- Venue -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <!-- ICON COLUMN -->
+                        <TextView
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:layout_marginEnd="12dp"
+                            android:gravity="center"
+                            android:text="📍"
+                            android:textColor="#333333"
+                            android:textSize="40sp" />
+
+                        <!-- TEXT COLUMN -->
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Location"
+                                android:textColor="#333333"
+                                android:textSize="22sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/tv_detail_venue"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:text="Groove Station"
+                                android:textColor="@color/black"
+                                android:textSize="20sp" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <!-- Price -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <!-- ICON COLUMN -->
+                        <TextView
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:layout_marginEnd="12dp"
+                            android:gravity="center"
+                            android:text="💰"
+                            android:textColor="#333333"
+                            android:textSize="40sp" />
+
+                        <!-- TEXT COLUMN -->
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Price"
+                                android:textColor="#333333"
+                                android:textSize="22sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/tv_detail_price"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:text="€8.00"
+                                android:textColor="#4CAF50"
+                                android:textSize="24sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <!-- Divider -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginBottom="9dp"
+                        android:background="#E0E0E0" />
+
+                    <!-- Mobility Level + Restrictions -->
+                    <LinearLayout
+                        android:id="@+id/layout_mobility_level"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="1dp"
+                        android:layout_marginBottom="16dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <!-- ICON COLUMN -->
+                        <TextView
+                            android:id="@+id/tv_mobility_icon"
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:layout_marginEnd="12dp"
+                            android:gravity="center"
+                            android:text="🚶"
+                            android:textColor="#333333"
+                            android:textSize="37sp" />
+
+                        <!-- TEXT COLUMN -->
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <!-- Mobility Level -->
+                            <TextView
+                                android:id="@+id/tv_mobility_description"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:text="Standing"
+                                android:textColor="@color/black"
+                                android:textSize="22sp"
+                                android:textStyle="bold" />
+
+                            <!-- Mobility Restrictions -->
+                            <TextView
+                                android:id="@+id/tv_mobility_restrictions"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:text="Limited seating available"
+                                android:textColor="@color/black"
+                                android:textSize="20sp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
 
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_back_to_list"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Back to List"
-            android:padding="16dp"
-            android:textSize="16sp"
-            app:cornerRadius="50dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"/>
+                    <!-- Accessibility Info -->
+                    <LinearLayout
+                        android:id="@+id/layout_accessibility"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
 
-    </LinearLayout>
+                        <!-- ICON COLUMN -->
+                        <TextView
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:layout_marginEnd="12dp"
+                            android:gravity="center"
+                            android:text="♿"
+                            android:textColor="@color/black"
+                            android:textSize="37sp" />
 
-</ScrollView>
+                        <!-- TEXT COLUMN -->
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_add_dorito"
-        android:layout_width="96dp"
-        android:layout_height="96dp"
-        android:backgroundTint="@color/purple_500"
+
+                            <TextView
+                                android:id="@+id/tv_accessibility_info"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:text="Wheelchair accessible venue"
+                                android:textColor="@color/black"
+                                android:textSize="20sp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_back_to_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Back to List"
+                android:padding="16dp"
+                android:textSize="16sp"
+                app:cornerRadius="50dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="120dp"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <!--Dorito Help Button-->
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/dorito_button"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
         android:layout_gravity="bottom|end"
-        android:layout_margin="16dp"
-        android:text="Add Dorito"
-        android:textColor="#FFFFFF"
-        app:cornerRadius="50dp"
-        />
+        android:layout_marginBottom="20dp"
+        android:layout_marginEnd="16dp"
+        android:background="@android:color/transparent"
+        app:lottie_fileName="help_animation.json"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"/>
+
+    <TextView
+        android:id="@+id/help_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Help?"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:background="@drawable/warning_badge"
+        android:padding="4dp"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="115dp"/>
+
 
 </FrameLayout>

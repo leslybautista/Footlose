@@ -31,6 +31,7 @@ public class Event {
     private String organizer;
     private boolean wheelchairAccessible;
     private String mobilityRestrictions;
+    private String mobilityLevel;  // ya hablamos de esto
 
     // ✅ REQUIRED empty constructor
     public Event() {
@@ -62,6 +63,10 @@ public class Event {
     public String getOrganizer() { return organizer; }
     public boolean isWheelchairAccessible() { return wheelchairAccessible; }
     public String getMobilityRestrictions() { return mobilityRestrictions; }
+
+    public String getMobilityLevel() { return mobilityLevel; }
+
+
 
     // ---------------- SETTERS ----------------
 
@@ -99,5 +104,10 @@ public class Event {
     }
     public void setMobilityRestrictions(String mobilityRestrictions) {
         this.mobilityRestrictions = mobilityRestrictions;
+    }
+
+    public void setMobilityLevel(String mobilityLevel) {
+        this.mobilityLevel = mobilityLevel;
+
     }
 }

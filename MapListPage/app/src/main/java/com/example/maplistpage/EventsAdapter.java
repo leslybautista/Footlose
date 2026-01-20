@@ -12,6 +12,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import androidx.annotation.NonNull;
+
 
 public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventViewHolder> {
 
@@ -52,30 +54,35 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventViewH
     }
 
     static class EventViewHolder extends RecyclerView.ViewHolder {
-        TextView tvEventType, tvTitle, tvDate, tvTime, tvVenue, tvDescription, tvPrice, tvBadge;
+        TextView tvTitle, tvDate, tvTime, tvVenue, tvPrice, tvMobilityLevel;
 
         EventViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvEventType = itemView.findViewById(R.id.tv_event_type);
             tvTitle = itemView.findViewById(R.id.tv_event_title);
             tvDate = itemView.findViewById(R.id.tv_event_date);
             tvTime = itemView.findViewById(R.id.tv_event_time);
             tvVenue = itemView.findViewById(R.id.tv_event_venue);
-            tvDescription = itemView.findViewById(R.id.tv_event_description);
             tvPrice = itemView.findViewById(R.id.tv_event_price);
-            tvBadge = itemView.findViewById(R.id.tv_registration_badge);
+            tvMobilityLevel = itemView.findViewById(R.id.tv_mobility_level);
         }
 
         void bind(Event event, OnEventClickListener listener) {
-            tvEventType.setText(event.getEventType());
             tvTitle.setText(event.getTitle());
             tvDate.setText(formatDate(event.getEventDate()));
             tvTime.setText(event.getStartTime() + " - " + event.getEndTime());
             tvVenue.setText(event.getVenueName());
-            tvDescription.setText(event.getDescription());
             tvPrice.setText(String.format(Locale.getDefault(), "€%.2f", event.getPrice()));
 
-            tvBadge.setVisibility(event.isRegistrationRequired() ? View.VISIBLE : View.GONE);
+            String mobilityLevel = event.getMobilityLevel(); // "Mixed", "Standing", "Seated"
+
+// Si es null, mostrar un valor por defecto o vacío
+            if (mobilityLevel == null) {
+                mobilityLevel = ""; // o "N/A" si quieres un placeholder
+            }
+
+            tvMobilityLevel.setText(mobilityLevel);
+            tvMobilityLevel.setVisibility(View.VISIBLE); // siempre visible
+
 
             itemView.setOnClickListener(v -> listener.onEventClick(event));
         }
