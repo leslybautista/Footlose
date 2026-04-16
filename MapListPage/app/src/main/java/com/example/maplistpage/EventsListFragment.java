@@ -14,13 +14,16 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 
 import java.util.List;
 
 public class EventsListFragment extends Fragment {
 
+    /**
+     * Fragment that displays a list of dance events.
+     * It handles event filtering via Chips and navigation to event details.
+     */
     private static final String TAG = "EventsListFragment";
 
     private RecyclerView recyclerView;
@@ -33,25 +36,28 @@ public class EventsListFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_events_list, container, false);
 
-        // Inicializar vistas
         recyclerView = view.findViewById(R.id.recycler_view_events);
         chipGroupFilters = view.findViewById(R.id.chip_group_filters);
 
-        // Inicializar DatabaseHelper
+        // Init DatabaseHelper
         dbHelper = new DatabaseHelper(requireContext());
 
-        // Configurar RecyclerView
+        // Configure RecyclerView
         setupRecyclerView();
 
-        // Configurar filtros
+        // Configure filters
         setupFilters();
 
-        // Cargar eventos iniciales (todos)
+        // Initial Data Load
         loadAllEvents();
 
         return view;
     }
 
+    /**
+     * Sets up the RecyclerView with a LinearLayoutManager and the EventsAdapter.
+     * Defines the click behavior: navigating to EventDetailActivity.
+     */
     private void setupRecyclerView() {
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
         adapter = new EventsAdapter(new java.util.ArrayList<>(), event -> {
@@ -63,10 +69,12 @@ public class EventsListFragment extends Fragment {
         recyclerView.setAdapter(adapter);
     }
 
+    /**
+     * Configures the ChipGroup listener to filter events based on the user's selection.
+     */
     private void setupFilters() {
         chipGroupFilters.setOnCheckedStateChangeListener((group, checkedIds) -> {
             if (checkedIds.isEmpty()) {
-                // Si no hay ninguno seleccionado, cargar todos
                 loadAllEvents();
                 return;
             }
@@ -88,6 +96,7 @@ public class EventsListFragment extends Fragment {
         });
     }
 
+    // --- Database Loading Methods ---
     private void loadAllEvents() {
         Log.d(TAG, "Loading all events");
         List<Event> events = dbHelper.getAllEvents();
@@ -98,12 +107,6 @@ public class EventsListFragment extends Fragment {
         Log.d(TAG, "Loading free events");
         List<Event> events = dbHelper.getFreeEvents();
         updateEventsList(events, "Free events");
-    }
-
-    private void loadThisMonthEvents() {
-        Log.d(TAG, "Loading this month events");
-        List<Event> events = dbHelper.getThisMonthEvents();
-        updateEventsList(events, "This month events");
     }
 
     private void loadStandingEvents() {
@@ -128,7 +131,6 @@ public class EventsListFragment extends Fragment {
         if (adapter != null) {
             adapter.updateEvents(events);
 
-            // Mostrar mensaje con cantidad de eventos
             String message = events.size() + " " + filterName + " found";
             Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show();
 
@@ -139,6 +141,7 @@ public class EventsListFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        // Clean up database connection when the fragment is destroyed
         if (dbHelper != null) {
             dbHelper.close();
         }

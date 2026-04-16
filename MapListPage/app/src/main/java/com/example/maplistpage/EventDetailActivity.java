@@ -2,27 +2,21 @@ package com.example.maplistpage;
 
 
 import android.os.Bundle;
-import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 
-import android.content.Intent;
-import android.net.Uri;
-import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.button.MaterialButton;
 
 import android.app.AlertDialog;
 import android.widget.ImageButton;
-import android.widget.TextView;
 import com.airbnb.lottie.LottieAnimationView;
 
 import java.text.ParseException;
@@ -30,9 +24,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import android.view.LayoutInflater;
-import android.view.View;
 
-
+/**
+ * EventDetailActivity displays comprehensive information about a specific dance event,
+ * including location, price, and accessibility/mobility details.
+ */
 public class EventDetailActivity extends AppCompatActivity {
 
     private static final String TAG = "EventDetailActivity";
@@ -54,7 +50,6 @@ public class EventDetailActivity extends AppCompatActivity {
 
     private TextView tvMobilityRestrictions;
 
-    private MaterialButton btnViewMap;
     private MaterialButton btnBackToList;
     private LottieAnimationView btnAddDorito;
 
@@ -66,27 +61,30 @@ public class EventDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_detail);
 
-        // Inicializar vistas
         initViews();
 
-        // Obtener ID del evento desde el Intent
+        // 1. DATA RETRIEVAL: Get the ID passed from the previous list activity
         int eventId = getIntent().getIntExtra("event_id", -1);
 
         Log.d(TAG, "Received event_id: " + eventId);
 
+        // 2. ERROR HANDLING: If no ID is found, close the activity to prevent crashes
         if (eventId == -1) {
             Toast.makeText(this, "Error: Event not found", Toast.LENGTH_SHORT).show();
             finish();
             return;
         }
 
-        // Cargar datos del evento
+        // Load event data
         loadEventDetails(eventId);
 
-        // Configurar botones
         setupButtons();
     }
 
+
+    /**
+     * Finds and links all XML views to Java variables.
+     */
     private void initViews() {
         tvDetailType = findViewById(R.id.tv_detail_type);
         tvDetailTitle = findViewById(R.id.tv_detail_title);
@@ -110,7 +108,10 @@ public class EventDetailActivity extends AppCompatActivity {
 
         dbHelper = new DatabaseHelper(this);
     }
-
+    /**
+     * Logic for showing the Accessibility Help Dialog.
+     * Uses a custom layout (dialog_help) and HTML formatting for clarity.
+     */
     private void showHelpText() {
         LayoutInflater inflater = LayoutInflater.from(this); // Activity context
         View dialogView = inflater.inflate(R.layout.dialog_help, null, false);
@@ -120,9 +121,9 @@ public class EventDetailActivity extends AppCompatActivity {
 
         String helpText =
                 "Explore dance events easily:<br><br>"
-                        + "• Tap an <b>event in the list</b> to see it on the map.<br>"
-                        + "• Tap a <b>map marker</b> for event details.<br>"
-                        + "• Use <b>MAP ALL EVENTS NEAR ME</b> to see everything.";
+                        + "• In a <b>Standing</b> event a medium level of mobility is expected"
+                        + "• In a <b>Seated</b> event, seating areas will be available, no restrictions"
+                        + "• In a <b>Mixed</b> event some level of movility is expected but seating area for breaks";
 
         txtHelp.setText(android.text.Html.fromHtml(helpText));
 
@@ -154,18 +155,22 @@ public class EventDetailActivity extends AppCompatActivity {
         displayEventInfo();
     }
 
+
+    /**
+     * Map Event object properties to the UI.
+     * Handles conditional styling (like Green text for FREE events).
+     */
     private void displayEventInfo() {
-        // Tipo de evento
+        // type of event
         tvDetailType.setText(currentEvent.getEventType());
 
-        // Título con emoji
+        // Title with emoji
         String titleWithEmoji = currentEvent.getEventTypeIcon() + " " + currentEvent.getTitle();
         tvDetailTitle.setText(titleWithEmoji);
 
-        // Descripción (solo la descripción principal, sin información de movilidad)
         tvDetailDescription.setText(currentEvent.getDescription());
 
-        // Fecha y hora
+        // Date and time
         String dateTimeText = formatEventDateTime(
                 currentEvent.getEventDate(),
                 currentEvent.getStartTime(),
@@ -173,13 +178,13 @@ public class EventDetailActivity extends AppCompatActivity {
         );
         tvDetailDatetime.setText(dateTimeText);
 
-        // Lugar (nombre + dirección, sin accesibilidad aquí)
+        // Place (name + address, no accessibility)
         StringBuilder venueText = new StringBuilder();
         venueText.append(currentEvent.getVenueName()).append("\n");
         venueText.append(currentEvent.getAddress());
         tvDetailVenue.setText(venueText.toString());
 
-        // Precio
+        // Cost
         if (currentEvent.isFree()) {
             tvDetailPrice.setText("FREE");
             tvDetailPrice.setTextColor(getResources().getColor(android.R.color.holo_green_dark));
@@ -192,26 +197,22 @@ public class EventDetailActivity extends AppCompatActivity {
             }
         }
 
-        // Mostrar información de movilidad
         displayMobilityInfo();
     }
 
     private void displayMobilityInfo() {
-        // Verificar si hay mobility level
+        // Verify mobility level
         if (currentEvent.getMobilityLevel() != null && !currentEvent.getMobilityLevel().isEmpty()) {
             layoutMobilityLevel.setVisibility(View.VISIBLE);
 
-            // Obtener valor de la DB
             String mobilityLevel = currentEvent.getMobilityLevel(); // Seated, Standing, Mixed
             String emoji = getMobilityEmoji(mobilityLevel);
 
-            // Asignar ícono
             tvMobilityIcon.setText(emoji);
 
-            // Mostrar mobility level en negrita
             tvMobilityDescription.setText(mobilityLevel);
 
-            // Mostrar restricciones debajo si existen
+            // Show mobility restrictions
             if (currentEvent.getMobilityRestrictions() != null &&
                     !currentEvent.getMobilityRestrictions().isEmpty()) {
                 tvMobilityRestrictions.setText(currentEvent.getMobilityRestrictions());
@@ -235,6 +236,9 @@ public class EventDetailActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Helper to return appropriate emoji based on mobility string.
+     */
     private String getMobilityEmoji(String mobilityLevel) {
         if (mobilityLevel == null) return "ℹ️";
 
@@ -250,21 +254,10 @@ public class EventDetailActivity extends AppCompatActivity {
         }
     }
 
-    private String getMobilityDescription(String mobilityLevel) {
-        if (mobilityLevel == null) return "Not specified";
 
-        switch (mobilityLevel) {
-            case "Standing":
-                return "Standing activity";
-            case "Seating":
-                return "Seated activity";
-            case "Mixed":
-                return "Mixed activity";
-            default:
-                return mobilityLevel;
-        }
-    }
-
+    /**
+     * Formats raw SQL date/time (YYYY-MM-DD) into human-friendly (Friday, Jan 22).
+     */
     private String formatEventDateTime(String date, String startTime, String endTime) {
         try {
             SimpleDateFormat inputDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
@@ -289,7 +282,6 @@ public class EventDetailActivity extends AppCompatActivity {
             return "";
         }
 
-        // Eliminar segundos si existen (HH:mm:ss -> HH:mm)
         if (time.length() > 5) {
             return time.substring(0, 5);
         }
@@ -299,59 +291,52 @@ public class EventDetailActivity extends AppCompatActivity {
 
     private void setupButtons() {
 
-        // Botón "Back to List"
+        //  "Back to List"
         btnBackToList.setOnClickListener(v -> {
             Log.d(TAG, "Back button clicked");
             finish();
         });
 
-        // Botón "Add Dorito"
+        //  "Add Dorito"
         btnAddDorito.setOnClickListener(v -> showHelpText());
 
     }
 
-    private void openMapLocation() {
-        if (currentEvent == null) {
-            Toast.makeText(this, "Event location not available", Toast.LENGTH_SHORT).show();
-            return;
-        }
+/**private void openMapLocation() {
+ if (currentEvent == null) {
+ Toast.makeText(this, "Event location not available", Toast.LENGTH_SHORT).show();
+ return;
+ }
 
-        Log.d(TAG, "Opening map for: " + currentEvent.getVenueName());
+ Log.d(TAG, "Opening map for: " + currentEvent.getVenueName());
 
-        String uri = String.format(Locale.ENGLISH,
-                "geo:%f,%f?q=%f,%f(%s)",
-                currentEvent.getLatitude(),
-                currentEvent.getLongitude(),
-                currentEvent.getLatitude(),
-                currentEvent.getLongitude(),
-                Uri.encode(currentEvent.getVenueName())
-        );
+ String uri = String.format(Locale.ENGLISH,
+ "geo:%f,%f?q=%f,%f(%s)",
+ currentEvent.getLatitude(),
+ currentEvent.getLongitude(),
+ currentEvent.getLatitude(),
+ currentEvent.getLongitude(),
+ Uri.encode(currentEvent.getVenueName())
+ );
 
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
-        intent.setPackage("com.google.android.apps.maps");
+ Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+ intent.setPackage("com.google.android.apps.maps");
 
-        if (intent.resolveActivity(getPackageManager()) != null) {
-            startActivity(intent);
-        } else {
-            String browserUri = String.format(Locale.ENGLISH,
-                    "https://www.google.com/maps/search/?api=1&query=%f,%f",
-                    currentEvent.getLatitude(),
-                    currentEvent.getLongitude()
-            );
-            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(browserUri));
-            startActivity(browserIntent);
-        }
-    }
+ if (intent.resolveActivity(getPackageManager()) != null) {
+ startActivity(intent);
+ } else {
+ String browserUri = String.format(Locale.ENGLISH,
+ "<a href="https://www.google.com/maps/search/?api=1&query=%f,%f">...</a>",
+ currentEvent.getLatitude(),
+ currentEvent.getLongitude()
+ );
+ Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(browserUri));
+ startActivity(browserIntent);
+ }
+ }
+ */
 
-    private void openRegistrationUrl() {
-        if (currentEvent.getRegistrationUrl() != null &&
-                !currentEvent.getRegistrationUrl().isEmpty()) {
-            Log.d(TAG, "Opening registration URL: " + currentEvent.getRegistrationUrl());
-            Intent browserIntent = new Intent(Intent.ACTION_VIEW,
-                    Uri.parse(currentEvent.getRegistrationUrl()));
-            startActivity(browserIntent);
-        }
-    }
+
 
     @Override
     protected void onDestroy() {
